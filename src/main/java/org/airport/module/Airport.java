@@ -1,15 +1,26 @@
 package org.airport.module;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 public class Airport {
 
-    boolean runwayOcupied = false;
-    int landingQueue = 0;
-    int takeoffQueue = 0;
+    int maxServiceTime;
+    int maxTicks;
+    float planeRatio;
+    
+    public airport(String name) {
+        Scanner scanner = new Scanner(System.in); scanner = new Scanner(System.in); scanner = new Scanner(System.in);
+            System.out.println("Welcome to " + name + "airport");
+            System.out.println("How long should the airport be open: ");
+            maxTicks = scanner.nextInt();
+            System.out.println("Average number of plane each hour: ");
+            planeRatio = scanner.nextFloat();        
+    }
 
-    int arrivalTime;
+    private class airplane {
+        
+    }
 
     public Airport() {
         createQueue();
@@ -31,6 +42,9 @@ public class Airport {
         int three = 3;
     }
 
+    // 1 klasse selv om det skal være 2 køer
+    //  -ankomstTid, -
+    // 1 rullebane
     private static int getPoissonRandom(double mean)
     {
         Random r = new Random();
