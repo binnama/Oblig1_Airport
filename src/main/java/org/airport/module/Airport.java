@@ -8,15 +8,19 @@ public class Airport {
     int runwayFree;
     int maxServiceTime;
     int maxTicks;
-    float planeRatio;
+    float toRatio;
+    float arRatio;
     
     public airport(String name) {
         Scanner scanner = new Scanner(System.in); 
         System.out.println("Welcome to " + name + "airport");
         System.out.println("How long should the airport be open: ");
         maxTicks = scanner.nextInt();
-        System.out.println("Average number of plane each hour: ");
-        planeRatio = scanner.nextFloat();
+        System.out.println("Average number of arrivals each hour: ");
+        arRatio = scanner.nextFloat();
+        System.out.println("Average number of takeoff each hour: ");
+        toRatio = scanner.nextFloat();
+
     }
     // Saves when the plane arrives
     private class airplane {
@@ -42,36 +46,19 @@ public class Airport {
         }
     }
 
-    private class landingQueue {
-        private int landingTime;
-        public landingQueue () {
-            landingTime = 0;
-        }
-        public void setPlaneTime(int time) {
-            landingTime = time;
-        }
-    }
-
-    private class takeoffQueue {
-        private int takeoffTime;
-        public takeoffQueue () {
-            takeoffTime = 0;
-        }
-        public void setPlaneTime(int time) {
-            takeoffTime = time;
-        }
-    }
-
     public void simulate() {
         
-        int sumPlaneTime    = 0; // Total waitingtime to use the runway
-        int sumPlanes       = 0; // Sum all plains entering the airport
-        int sumRunwayFree   = 0; // All the times the runway was free
+        int sumPlaneTime        = 0; // Total waitingtime to use the runway
+        int sumPlanes           = 0; // Sum all plains entering the airport
+        int sumRunwayFree       = 0; // All the times the runway was free
+        int sumRejectedPlanes   = 0;
         
         // Making a queue
-        Queue<landingQueue> lq = new LinkedList<landingQueue>();
-        Queue<takeoffQueue> tq = new LinkedList<takeoffQueue>();
+        //Queue<landingQueue> lq = new LinkedList<landingQueue>();
+        //Queue<takeoffQueue> tq = new LinkedList<takeoffQueue>();
 
+        Queue<airplane> lq = new LinkedList<airplane>();
+        Queue<airplane> tq = new LinkedList<airplane>();
 
         // Makes an array for the runway.
         runway[] open = new runway[runwayFree];
@@ -91,24 +78,34 @@ public class Airport {
             }
           
             if (mean < planeRatio) {
-                runwayQueue.add();
+                lq.add(new airplane(time)); //Må random legge til fly i køene
             }
 
 
             for (int i = 0; i < lq && i < tq; i++) {
-                if (landing[i].isAvailable(time)) {
-                    if (!landing.isEmpty()) {
-                        takeoff to = takeoff.remove();
+                if (open[i].isAvailable(time)) {
+                    if (!lq.isEmpty()) { //Planes can take off
+                        airplane ap = tq.remove();
                         
                         // Markes bussy runway
-                        runway.setPlaneTime(time);
-                        sumPlaneTime += to.queueTime(time);
+                        open[i].setPlaneTime(time);
+                        sumPlaneTime += ap.queueTime(time);
                         sumPlanes++;
                     }
-                    else if (!landing !=) {
-                        
+                    else if (lq.size() > 0 ) {
+                        airplane ap = lq.remove();
+
+                        open[i].setPlaneTime(time);
+                        sumPlaneTime += ap.queueTime(time);
+                        sumPlanes++;
+                    }
+                    else if (lq.size() > 5) {
+                        System.out.println("Sorry, please find another airport.");
+                        sumRejectedPlanes++;
                     }
                 }
+                else
+                sumRunwayFree++;
             }
         }
     }
@@ -127,3 +124,24 @@ public class Airport {
         return k - 1;
     }
 }
+/*
+    private class landingQueue {
+        private int landingTime;
+        public landingQueue () {
+            landingTime = 0;
+        }
+        public void setPlaneTime(int time) {
+            landingTime = time;
+        }
+    }
+
+    private class takeoffQueue {
+        private int takeoffTime;
+        public takeoffQueue () {
+            takeoffTime = 0;
+        }
+        public void setPlaneTime(int time) {
+            takeoffTime = time;
+        }
+    }
+*/
