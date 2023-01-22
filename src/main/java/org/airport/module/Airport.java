@@ -10,8 +10,9 @@ public class Airport {
     int maxTicks;
     float toRatio;
     float arRatio;
+    float ratio;
     
-    public airport(String name) {
+    public Airport(String name) {
         Scanner scanner = new Scanner(System.in); 
         System.out.println("Welcome to " + name + "airport");
         System.out.println("How long should the airport be open: ");
@@ -20,6 +21,7 @@ public class Airport {
         arRatio = scanner.nextFloat();
         System.out.println("Average number of takeoff each hour: ");
         toRatio = scanner.nextFloat();
+        ratio = (arRatio + toRatio) / 2;
 
     }
     // Saves when the plane arrives
@@ -51,11 +53,8 @@ public class Airport {
         int sumPlaneTime        = 0; // Total waitingtime to use the runway
         int sumPlanes           = 0; // Sum all plains entering the airport
         int sumRunwayFree       = 0; // All the times the runway was free
-        int sumRejectedPlanes   = 0;
+        int sumRejectedPlanes   = 0; // Counting plains arriving when  the landinqueue is full
         
-        // Making a queue
-        //Queue<landingQueue> lq = new LinkedList<landingQueue>();
-        //Queue<takeoffQueue> tq = new LinkedList<takeoffQueue>();
 
         Queue<airplane> lq = new LinkedList<airplane>();
         Queue<airplane> tq = new LinkedList<airplane>();
@@ -68,34 +67,30 @@ public class Airport {
             open[i] = new runway();
         }
 
-        Random R = new Random();
-
         // Simulating for each tick
-        for (int time = 0; time < maxTicks; i++) {
+        for (int time = 0; time < maxTicks; time++) {
 
-            if(R.nextDouble() < planeRatio) {
-                
+            if(getPoissonRandom(ratio) < toRatio) {
+                lq.add(new airplane(time));
+            }
+            if(getPoissonRandom(ratio) < arRatio) {
+                tq.add(new airplane(time));
             }
           
-            if (mean < planeRatio) {
-                lq.add(new airplane(time)); //Må random legge til fly i køene
-            }
-
-
-            for (int i = 0; i < lq && i < tq; i++) {
-                if (open[i].isAvailable(time)) {
+            //for (int i = 0; ; i++) {
+                if (open[time].isAvailable(time)) {
                     if (!lq.isEmpty()) { //Planes can take off
                         airplane ap = tq.remove();
                         
                         // Markes bussy runway
-                        open[i].setPlaneTime(time);
+                        open[time].setPlaneTime(time);
                         sumPlaneTime += ap.queueTime(time);
                         sumPlanes++;
                     }
                     else if (lq.size() > 0 ) {
                         airplane ap = lq.remove();
 
-                        open[i].setPlaneTime(time);
+                        open[time].setPlaneTime(time);
                         sumPlaneTime += ap.queueTime(time);
                         sumPlanes++;
                     }
@@ -104,8 +99,9 @@ public class Airport {
                         sumRejectedPlanes++;
                     }
                 }
-                else
+                else {
                 sumRunwayFree++;
+                System.out.println("Hei");
             }
         }
     }
