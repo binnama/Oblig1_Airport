@@ -8,19 +8,27 @@ public class Airport {
     int runwayFree;
     int maxServiceTime;
     int maxTicks;
-    float toRatio;
-    float arRatio;
-    float ratio;
-    
+    //float toRatio;
+    //float arRatio;
+    //float ratio;
+    double toRatio;
+    double arRatio;
+    double ratio;
+
     public Airport(String name) {
+        /*
         Scanner scanner = new Scanner(System.in); 
-        System.out.println("Welcome to " + name + "airport");
+        System.out.println("Welcome to " + name + " airport");
         System.out.println("How long should the airport be open: ");
         maxTicks = scanner.nextInt();
         System.out.println("Average number of arrivals each hour: ");
         arRatio = scanner.nextFloat();
         System.out.println("Average number of takeoff each hour: ");
         toRatio = scanner.nextFloat();
+        */
+        maxTicks = 5;
+        arRatio = 0.4;
+        toRatio = 0.4;
         ratio = (arRatio + toRatio) / 2;
 
     }
@@ -54,6 +62,7 @@ public class Airport {
         int sumPlanes           = 0; // Sum all plains entering the airport
         int sumRunwayFree       = 0; // All the times the runway was free
         int sumRejectedPlanes   = 0; // Counting plains arriving when  the landinqueue is full
+        int plane               = 0;
         
 
         Queue<airplane> lq = new LinkedList<airplane>();
@@ -71,13 +80,20 @@ public class Airport {
         for (int time = 0; time < maxTicks; time++) {
 
             if(getPoissonRandom(ratio) < toRatio) {
-                lq.add(new airplane(time));
+                if (lq.size() > 5) {
+                    System.out.println("Sorry, please find another airport.");
+                    sumRejectedPlanes++;
+                }
+                else {
+                    lq.add(new airplane(time));
+                    plane++;
+                    System.out.println("Plane {plane.size()} ready for landing.");
+                }
             }
             if(getPoissonRandom(ratio) < arRatio) {
                 tq.add(new airplane(time));
             }
           
-            //for (int i = 0; ; i++) {
                 if (open[time].isAvailable(time)) {
                     if (!lq.isEmpty()) { //Planes can take off
                         airplane ap = tq.remove();
@@ -94,16 +110,16 @@ public class Airport {
                         sumPlaneTime += ap.queueTime(time);
                         sumPlanes++;
                     }
-                    else if (lq.size() > 5) {
-                        System.out.println("Sorry, please find another airport.");
-                        sumRejectedPlanes++;
-                    }
                 }
                 else {
                 sumRunwayFree++;
                 System.out.println("Hei");
             }
         }
+        System.out.println("The airport is now closed.");
+        System.out.println("Times the runway was in use: " + sumPlanes);
+        System.out.println("Planes still in landingqueue: " + lq.size());
+        System.out.println("Planes still in takeoffQueue: " + tq.size());
     }
 
     private static int getPoissonRandom(double mean)
@@ -120,24 +136,3 @@ public class Airport {
         return k - 1;
     }
 }
-/*
-    private class landingQueue {
-        private int landingTime;
-        public landingQueue () {
-            landingTime = 0;
-        }
-        public void setPlaneTime(int time) {
-            landingTime = time;
-        }
-    }
-
-    private class takeoffQueue {
-        private int takeoffTime;
-        public takeoffQueue () {
-            takeoffTime = 0;
-        }
-        public void setPlaneTime(int time) {
-            takeoffTime = time;
-        }
-    }
-*/
