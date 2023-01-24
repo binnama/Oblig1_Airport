@@ -81,13 +81,10 @@ public class Airport {
 
             if(getPoissonRandom(ratio) < toRatio) {
                 if (lq.size() > 5) {
-                    System.out.println("Sorry, please find another airport.");
                     sumRejectedPlanes++;
                 }
                 else {
                     lq.add(new airplane(time));
-                    plane++;
-                    System.out.println("Plane {plane.size()} ready for landing.");
                 }
             }
             if(getPoissonRandom(ratio) < arRatio) {
@@ -113,8 +110,9 @@ public class Airport {
                 }
                 else {
                 sumRunwayFree++;
-                System.out.println("Hei");
             }
+
+            System.out.println("{}");
         }
         System.out.println("The airport is now closed.");
         System.out.println("Times the runway was in use: " + sumPlanes);
