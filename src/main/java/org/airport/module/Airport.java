@@ -17,8 +17,8 @@ public class Airport {
 
     public Airport(String name) {
         /*
-        Scanner scanner = new Scanner(System.in); 
-        System.out.println("Welcome to " + name + " airport");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to " + name + " airport. Please, save us!");
         System.out.println("How long should the airport be open: ");
         maxTicks = scanner.nextInt();
         System.out.println("Average number of arrivals each hour: ");
@@ -79,36 +79,49 @@ public class Airport {
         // Simulating for each tick
         for (int time = 0; time < maxTicks; time++) {
 
+            // Plane for landing
             if(getPoissonRandom(ratio) < toRatio) {
-                if (lq.size() > 5) {
-                    sumRejectedPlanes++;
+                while (lq.size() < 5) {
+                    lq.add(new airplane(time));
+                    sumPlanes++;
+
+                    if(open[time].isAvailable(time)) {
+
+
+                    }
+                }
+                sumRejectedPlanes++;
+                sumPlanes++;
+                System.out.println("Our landinqueue is full, please move on.");
+            }
+
+
+
+            // Checks if the runway is clear
+            if (open[time].isAvailable(time)) {
+                if (!lq.isEmpty()) { //Planes can take off
+                    airplane ap = tq.remove();
+
+                    // Markes bussy runway
+                    open[time].setPlaneTime(time);
+                    sumPlaneTime += ap.queueTime(time);
+                    sumPlanes++;
+
                 }
                 else {
-                    lq.add(new airplane(time));
+                    airplane ap = lq.remove();
+
+                    open[time].setPlaneTime(time);
+                    sumPlaneTime += ap.queueTime(time);
+                    sumPlanes++;
                 }
             }
+
             if(getPoissonRandom(ratio) < arRatio) {
                 tq.add(new airplane(time));
             }
-          
-                if (open[time].isAvailable(time)) {
-                    if (!lq.isEmpty()) { //Planes can take off
-                        airplane ap = tq.remove();
-                        
-                        // Markes bussy runway
-                        open[time].setPlaneTime(time);
-                        sumPlaneTime += ap.queueTime(time);
-                        sumPlanes++;
-                    }
-                    else if (lq.size() > 0 ) {
-                        airplane ap = lq.remove();
 
-                        open[time].setPlaneTime(time);
-                        sumPlaneTime += ap.queueTime(time);
-                        sumPlanes++;
-                    }
-                }
-                else {
+            else {
                 sumRunwayFree++;
             }
 

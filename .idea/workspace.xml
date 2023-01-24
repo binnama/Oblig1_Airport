@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82af507c-3c66-456e-b1ba-4f0ee8373299" name="Changes" comment="feat: making changes">
+    <list default="true" id="82af507c-3c66-456e-b1ba-4f0ee8373299" name="Changes" comment="feat: first push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/airport/module/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/airport/module/Airport.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DarkyenusTimeTracker">
+    <option name="totalTimeSeconds" value="3992" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -26,13 +30,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="workspaceImportEnabled" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="2KSCUAndW2QOZ0HDfKcE6nSz68Z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -43,8 +40,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/binna/Documents/HIOF/Semester_4/alg.dat/øving2.java",
+    "last_opened_file_path": "C:/Users/Binna/Downloads/postkontor.java",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -53,35 +51,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.airport.module" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.airport.Main" />
-      <module name="O1_Airport" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.airport.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="øving2" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="øving2" />
-      <module name="O1_Airport" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="airportTest.make_queue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="O1_Airport" />
       <option name="PACKAGE_NAME" value="" />
@@ -94,7 +64,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.airportTest.make_queue" />
       </list>
     </recent_temporary>
@@ -107,14 +76,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673958613544</updated>
-      <workItem from="1673958614674" duration="9506000" />
-      <workItem from="1674130210907" duration="1217000" />
-      <workItem from="1674231165873" duration="667000" />
-      <workItem from="1674304860226" duration="1413000" />
-      <workItem from="1674381410400" duration="2985000" />
-      <workItem from="1674465696968" duration="1847000" />
-      <workItem from="1674480206705" duration="605000" />
-      <workItem from="1674550151273" duration="5387000" />
+      <workItem from="1673958614674" duration="7685000" />
+      <workItem from="1674571415593" duration="5409000" />
     </task>
     <task id="LOCAL-00001" summary="feat: first push">
       <created>1673958755538</created>
@@ -123,35 +86,7 @@
       <option name="project" value="LOCAL" />
       <updated>1673958755538</updated>
     </task>
-    <task id="LOCAL-00002" summary="feat: added testestes">
-      <created>1674043598317</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1674043598317</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feat: lots of work on simulate, removed two queue-classes">
-      <created>1674231292523</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1674231292523</updated>
-    </task>
-    <task id="LOCAL-00004" summary="feat: removed a loop from simulate">
-      <created>1674381449510</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1674381449510</updated>
-    </task>
-    <task id="LOCAL-00005" summary="feat: making changes">
-      <created>1674560004420</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1674560004420</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,11 +105,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: first push" />
-    <MESSAGE value="feat: added testestes" />
-    <MESSAGE value="feat: added classes airplane, runways, simulate" />
-    <MESSAGE value="feat: lots of work on simulate, removed two queue-classes" />
-    <MESSAGE value="feat: removed a loop from simulate" />
-    <MESSAGE value="feat: making changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: making changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: first push" />
   </component>
 </project>
