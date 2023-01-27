@@ -5,9 +5,10 @@ import java.util.*;
 
 public class Airport {
 
-    int runwayFree = 1;
+    int runwayFree;
+    int rw = 1;
     int maxServiceTime;
-    int maxTicks = 2;
+    int maxTicks = 3;
     //float toRatio;
     //float arRatio;
     //float ratio;
@@ -29,7 +30,7 @@ public class Airport {
         */
 
         arRatio = 0.6;
-        toRatio = 0.3;
+        toRatio = 0.4;
         ratio = (arRatio + toRatio) / 2;
 
     }
@@ -57,7 +58,8 @@ public class Airport {
         }
     }
 
-    public void simulate() {
+    public void simulate()
+        throws IllegalStateException {
 
         int sumPlaneTime        = 0; // Total waitingtime to use the runway
         int planeLandingQ       = 0;
@@ -66,22 +68,27 @@ public class Airport {
         int sumRunwayFree       = 0; // All the times the runway was free
         int sumRejectedPlanes   = 0; // Counting plains arriving when  the landinqueue is full
         int runway              = 0;
+        int plane               = 0;
 
 
         Queue<airplane> lq = new LinkedList<airplane>();
         Queue<airplane> tq = new LinkedList<airplane>();
 
         // Makes an array for the runway
-        runway[] open = new runway[runwayFree];
+        runway[] open = new runway[rw];
 
         // Initates empty runway
-        for (int i = 0; i < runwayFree; i++) {
+        for (int i = 0; i < rw; i++) {
             open[i] = new runway();
         }
+        System.out.println("Runway(): " + open.length);
 
         // Simulating for each tick
-        for (int time = 0; time < maxTicks; time++) {
+        for (int time = 1; time < maxTicks; time++) {
             System.out.println("Tick: " + time);
+            System.out.println("Test0.4: Runway queue-length: " + open.length);
+            //System.out.println("Test0.5: Runway open: " + open.getElement());
+
 
             // Plane for landing
             if(getPoissonRandom(ratio) < toRatio) {
@@ -92,10 +99,11 @@ public class Airport {
                     System.out.println("Our landinqueue is full, please move on.");
                 }
                 else {
-                    lq.add(new airplane(time));
+                    plane++;
+                    lq.add(new airplane(plane)); // Kan sumPlanes brukes istedenfor?
                     sumPlanes++;
 
-                    System.out.println("Plane " + time + " is preparing to land");
+                    System.out.println("Plane " + plane + " is preparing to land");
                     System.out.println("test2.lq: " + lq.size());
                 }
             }
@@ -109,37 +117,45 @@ public class Airport {
                     sumPlanes++;
                     System.out.println("Our takeoff-queue is full. Come back later");
                 }
-                tq.add(new airplane(time));
-                sumPlanes++;
-                System.out.println("Plane " + time + " is preparing for takeoff");
-                System.out.println("test2.tq: " + tq.size());
+                else {
+                    plane++;
+                    tq.add(new airplane(plane)); // Kan sumPlanes brukes istedenfor?
+                    sumPlanes++;
+                    System.out.println("Plane " + plane + " is preparing for takeoff");
+                    System.out.println("test2.tq: " + tq.size());
+                }
             }
             System.out.println("test3.1: sumPlanes: " + sumPlanes);
 
             // Checks if the runway is clear
-            if (open[time].isAvailable(time)) {
-                if (!lq.isEmpty()) { // Planes can land
-                    airplane ap = lq.remove();
-                    System.out.println("Plane " + time + " removed from lq.");
+            for (int i = 0; i < rw; i++) {
+                if (open[i].isAvailable(time)) {
+                    if (!lq.isEmpty()) { // Planes can land
+                        System.out.println("TEST: Plane " + lq.peek() + " removed from lq.");
+                        airplane apl = lq.remove();
 
-                    // Makes busy runway
-                    open[time].setPlaneTime(time);
-                    sumPlaneTime += ap.queueTime(time);
-                    runway++;
-                }
-                else{
-                    airplane ap = tq.remove();
-                    System.out.println("Plane " + time + " removed from tq.");
+                        // Makes busy runway
+                        open[i].setPlaneTime(time); //
+                        sumPlaneTime += apl.queueTime(time);
+                        runway++;
+                        System.out.println("Test3.5: Runway-lq: " + open.length);
+                    }
+                    else if (lq.isEmpty()){
+                        System.out.println("Plane " + lq.peek() + " removed from tq.");
+                        airplane apt = tq.remove();
 
-                    // Makes busy runway
-                    open[time].setPlaneTime(time);
-                    sumPlaneTime += ap.queueTime(time);
-                    runway++;
+                        // Makes busy runway
+                        open[i].setPlaneTime(time);
+                        sumPlaneTime += apt.queueTime(time);
+                        runway++;
+                        System.out.println("Test3.5: Runway-tq: " + open.length);
+                    }
+                    else {
+                        sumRunwayFree++;
+                        System.out.println("test4: runwayFree: " + runwayFree);
+                    }
                 }
-            }
-            else {
-                sumRunwayFree++;
-                System.out.println("test4: runwayFree: " + runwayFree);
+
             }
         }
 
@@ -150,6 +166,7 @@ public class Airport {
         System.out.println("Planes still in takeoffQueue: " + tq.size());
         System.out.println("Planes asked to move along: " + sumRejectedPlanes);
         System.out.println("Average time in queue: " + sumPlaneTime);
+        System.out.println("The runway was empty " + sumRunwayFree + " times");
     }
 
     private static int getPoissonRandom(double mean)
