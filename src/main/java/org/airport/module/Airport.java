@@ -1,3 +1,10 @@
+/*
+TODO:
+-toString
+-Fix Possion-mess :)
+
+*/
+
 package org.airport.module;
 
 import java.io.*;
@@ -29,9 +36,9 @@ public class Airport {
         toRatio = scanner.nextFloat();
         */
 
-        arRatio = 0.6;
-        toRatio = 0.4;
-        ratio = (arRatio + toRatio) / 2;
+        arRatio = 0;
+        toRatio = 0;
+       // ratio = (arRatio + toRatio) / 2;
 
     }
     // Saves when the plane arrives
@@ -91,7 +98,7 @@ public class Airport {
 
 
             // Plane for landing
-            if(getPoissonRandom(ratio) < toRatio) {
+            if(getPoissonRandom(arRatio) < toRatio) {
                 System.out.println("test 2.1: print ratio: " + ratio);
                 if (lq.size() > 5) {
                     sumRejectedPlanes++;
@@ -110,7 +117,7 @@ public class Airport {
             System.out.println("test3: sumPlanes: " + sumPlanes);
 
             // Plane for takeoff
-            if(getPoissonRandom(ratio) < arRatio) {
+            if(getPoissonRandom(toRatio) < arRatio) {
                 System.out.println("test 2.2: print ratio: " + ratio);
                 if(tq.size() > 10) {
                     sumRejectedPlanes++;
@@ -131,8 +138,9 @@ public class Airport {
             for (int i = 0; i < rw; i++) {
                 if (open[i].isAvailable(time)) {
                     if (!lq.isEmpty()) { // Planes can land
-                        System.out.println("TEST: Plane " + lq.peek() + " removed from lq.");
-                        airplane apl = lq.remove();
+                        //System.out.println("TEST: Plane " + lq.peek() + " removed from lq.");
+                        airplane apl = lq.poll();
+                        System.out.println("test+: " + apl);
 
                         // Makes busy runway
                         open[i].setPlaneTime(time); //
@@ -140,7 +148,7 @@ public class Airport {
                         runway++;
                         System.out.println("Test3.5: Runway-lq: " + open.length);
                     }
-                    else if (lq.isEmpty()){
+                    else if (lq.isEmpty() && !tq.isEmpty()){
                         System.out.println("Plane " + lq.peek() + " removed from tq.");
                         airplane apt = tq.remove();
 
@@ -153,6 +161,7 @@ public class Airport {
                     else {
                         sumRunwayFree++;
                         System.out.println("test4: runwayFree: " + runwayFree);
+                        System.out.println(time + ": The airport is empty.");
                     }
                 }
 
@@ -166,7 +175,7 @@ public class Airport {
         System.out.println("Planes still in takeoffQueue: " + tq.size());
         System.out.println("Planes asked to move along: " + sumRejectedPlanes);
         System.out.println("Average time in queue: " + sumPlaneTime);
-        System.out.println("The runway was empty " + sumRunwayFree + " times");
+        System.out.println("The runway was empty " + (sumRunwayFree / maxTicks) + "% of the time");
     }
 
     private static int getPoissonRandom(double mean)
