@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82af507c-3c66-456e-b1ba-4f0ee8373299" name="Changes" comment="Enabled scanner, added if sumPlanes &lt; 0, and comments">
+    <list default="true" id="82af507c-3c66-456e-b1ba-4f0ee8373299" name="Changes" comment="Added sum takeoffs and landings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/airport/module/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/airport/module/Airport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/airportTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,20 +39,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/binna/Documents/HIOF/Semester_4/alg.dat/øving2.java&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/binna/Documents/HIOF/Semester_4/alg.dat",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.airport.module" />
@@ -117,7 +116,7 @@
       <workItem from="1674480206705" duration="605000" />
       <workItem from="1674550151273" duration="5387000" />
       <workItem from="1675072384432" duration="46000" />
-      <workItem from="1675075137595" duration="16066000" />
+      <workItem from="1675075137595" duration="18444000" />
     </task>
     <task id="LOCAL-00001" summary="feat: first push">
       <created>1673958755538</created>
@@ -175,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675098789405</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added sum takeoffs and landings">
+      <created>1675099405436</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1675099405436</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,6 +208,7 @@
     <MESSAGE value="Added gateQueue-queue + while-loop" />
     <MESSAGE value="Removed test-souts" />
     <MESSAGE value="Enabled scanner, added if sumPlanes &lt; 0, and comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Enabled scanner, added if sumPlanes &lt; 0, and comments" />
+    <MESSAGE value="Added sum takeoffs and landings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added sum takeoffs and landings" />
   </component>
 </project>

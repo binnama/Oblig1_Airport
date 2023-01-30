@@ -67,6 +67,8 @@ public class Airport {
         int runway              = 0;
         int planesLanding       = 0;
         int planesTakeoff       = 0;
+        int sumlanding          = 0;
+        int sumTakeoff          = 0;
 
 
         Queue<airplane> landingQueue = new LinkedList<airplane>();
@@ -86,7 +88,7 @@ public class Airport {
 
         // Simulating for each tick
         for (int time = 0; time < maxTicks; time++) {
-            System.out.println("Hour: " + (time + 1));
+            System.out.println("\nHour " + (time + 1) + ":");
 
             // Plane for landing
             //Possion:
@@ -154,9 +156,13 @@ public class Airport {
                     } else {
                         // Counts amount of times the runway is not used
                         sumRunwayFree++;
-                        System.out.println("Hour " + time + ": The airport is empty.");
+                        System.out.println("The airport is empty.");
                     }
                 }
+
+                // Gather statistic for queuelenght
+                sumlanding += landingQueue.size();
+                sumTakeoff += takeoffQueue.size();
 
                 // Checks if takeoff-queue have less than 10 planes.
                 // Moves a plane from the gate- to takeoff-queue if conditions are met
@@ -170,17 +176,19 @@ public class Airport {
             System.out.println("\nThe airport is now closed.");
             System.out.println("The airport was open for " + maxTicks + " hours today.");
             System.out.println("Total amount of planes handeled: " + sumPlanes);
-            System.out.println("Total planes landing " + planesLanding);
-            System.out.println("Total planes taking off " + planesTakeoff);
-            System.out.println("Times the runway was in use: " + runway);
-            System.out.println("Planes still in landingqueue: " + landingQueue.size());
-            System.out.println("Planes still in takeoffQueue: " + takeoffQueue.size());
+            System.out.println("Total planes landing: " + planesLanding);
+            System.out.println("Total planes leaving: " + planesTakeoff);
+            System.out.println("Planes still in landing-queue: " + landingQueue.size());
+            System.out.println("Planes still in takeoff-queue: " + takeoffQueue.size());
             System.out.println("Planes asked to move along: " + sumRejectedPlanes);
-            System.out.println("Planes still at the gate: " + gateQueue.size());
+            System.out.println("Planes still at the gates: " + gateQueue.size());
             if (sumPlanes > 0) {
+                System.out.println("Average lenght of landing-queue: " + ((float) sumlanding / (float) maxTicks));
+                System.out.println("Average lenght of takeoff-queue: " + ((float) sumTakeoff / (float) maxTicks));
                 System.out.println("Average time in landingqueue: " + ((float) planeLandingQ / (float) sumPlanes) + " hours");
                 System.out.println("Average time in takeoffqueue: " + ((float) planeTakeoffQ / (float) sumPlanes) + " hours");
             }
+            System.out.println("Times the runway was in use: " + runway);
             System.out.println("The runway was empty " + (((float) sumRunwayFree / (float) maxTicks) * 100) + "% of the time");
         }
 
