@@ -18,7 +18,6 @@ public class Airport {
 
         System.out.print("How many hours should the airport be open: ");
         maxTicks = scanner.nextInt();
-
         System.out.print("Average number of arrivals each hour: ");
         averageArrival = scanner.nextFloat();
         System.out.print("Average number of takeoff each hour: ");
@@ -60,12 +59,14 @@ public class Airport {
     public void simulate()
         throws IllegalStateException {
 
-        int planeLandingQ = 0;
-        int planeTakeoffQ = 0;
-        int sumPlanes = 0; // Sum all plains entering the airport
-        int sumRunwayFree = 0; // All the times the runway was free
-        int sumRejectedPlanes = 0; // Counting plains arriving when  the landinqueue is full
-        int runway = 0;
+        int planeLandingQ       = 0;
+        int planeTakeoffQ       = 0;
+        int sumPlanes           = 0; // Sum all plains entering the airport
+        int sumRunwayFree       = 0; // All the times the runway was free
+        int sumRejectedPlanes   = 0; // Counting plains arriving when  the landinqueue is full
+        int runway              = 0;
+        int planesLanding       = 0;
+        int planesTakeoff       = 0;
 
 
         Queue<airplane> landingQueue = new LinkedList<airplane>();
@@ -140,6 +141,7 @@ public class Airport {
                         open[i].setPlaneTime(time); //
                         planeLandingQ += apl.queueTime(time);
                         runway++;
+                        planesLanding++;
                     } else if (landingQueue.isEmpty() && !takeoffQueue.isEmpty()) {
                         airplane apt = takeoffQueue.poll();
                         System.out.println("Plane " + apt + " left the airport.");
@@ -148,6 +150,7 @@ public class Airport {
                         open[i].setPlaneTime(time);
                         planeTakeoffQ += apt.queueTime(time);
                         runway++;
+                        planesTakeoff++;
                     } else {
                         // Counts amount of times the runway is not used
                         sumRunwayFree++;
@@ -167,6 +170,8 @@ public class Airport {
             System.out.println("\nThe airport is now closed.");
             System.out.println("The airport was open for " + maxTicks + " hours today.");
             System.out.println("Total amount of planes handeled: " + sumPlanes);
+            System.out.println("Total planes landing " + planesLanding);
+            System.out.println("Total planes taking off " + planesTakeoff);
             System.out.println("Times the runway was in use: " + runway);
             System.out.println("Planes still in landingqueue: " + landingQueue.size());
             System.out.println("Planes still in takeoffQueue: " + takeoffQueue.size());
